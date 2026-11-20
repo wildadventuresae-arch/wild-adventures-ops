@@ -1,0 +1,12 @@
+{
+  "name": "wild-adventures-ops",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "Application d'exploitation Wild Adventures : bookings, agents, storage, flotte, WhatsApp et Google Agenda.",
+  "engines": { "node": ">=20" },
+  "scripts": {
+    "test": "node --test tests/*.test.js",
+    "dev": "node scripts/dev-server.js"
+  }
+}
