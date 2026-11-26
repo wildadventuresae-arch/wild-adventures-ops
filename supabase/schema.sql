@@ -37,6 +37,13 @@ create policy "staff write records" on public.records for all    to authenticate
 drop policy if exists "read own profile" on public.staff_users;
 create policy "read own profile" on public.staff_users for select to authenticated using (user_id = auth.uid() or public.is_staff());
 
+-- Droits d'accès des comptes connectés (les nouveaux projets Supabase ne les donnent plus automatiquement)
+grant usage on schema public to authenticated, service_role;
+grant select, insert, update, delete on public.records to authenticated;
+grant select on public.staff_users to authenticated;
+grant all on public.records, public.staff_users to service_role;
+grant execute on function public.is_staff() to authenticated;
+
 -- 4. Mises à jour en direct entre les écrans (réception, guides, téléphone)
 do $$ begin
   alter publication supabase_realtime add table public.records;
